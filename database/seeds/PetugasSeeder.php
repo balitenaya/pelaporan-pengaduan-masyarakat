@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class PetugasSeeder extends Seeder
 {
@@ -13,23 +14,23 @@ class PetugasSeeder extends Seeder
     public function run()
     {
         DB::table('petugas')->insert([
-           'nama' => 'Admin',
-           'username' => 'admin',
-           'password' => Hash::make('admin123'),
-           'telepon' => '082765875379',
-           'level' => 'admin',
-           'created_at' => now(),
-           'updated_at' => now()
+            'nama' => 'Admin',
+            'username' => 'admin',
+            'password' => Hash::make('admin123'),
+            'telepon' => '082765875379',
+            'level' => 'admin',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
-      
+
         DB::table('petugas')->insert([
-           'nama' => 'Petugas',
-           'username' => 'petugas',
-           'password' => Hash::make('petugas123'),
-           'telepon' => '089476376964',
-           'level' => 'petugas',
-           'created_at' => now(),
-           'updated_at' => now()
+            'nama' => 'Petugas',
+            'username' => 'petugas',
+            'password' => Hash::make('petugas123'),
+            'telepon' => '089476376964',
+            'level' => 'petugas',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }

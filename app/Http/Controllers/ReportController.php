@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pengaduan;
 use RealRashid\SweetAlert\Facades\Alert;
-use Barryvdh\DomPDF\PDF;
+use PDF;
 
 class ReportController extends Controller
 {

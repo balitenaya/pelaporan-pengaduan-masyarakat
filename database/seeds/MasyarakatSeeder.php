@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class MasyarakatSeeder extends Seeder
 {
@@ -20,7 +21,18 @@ class MasyarakatSeeder extends Seeder
             'telepon' => '087689564864',
             'level' => 'masyarakat',
             'created_at' => now(),
-           'updated_at' => now()
+            'updated_at' => now()
+        ]);
+
+        DB::table('masyarakat')->insert([
+            'nik' => '5102040407000002',
+            'nama' => 'Bali tenaya',
+            'username' => 'bali',
+            'password' => Hash::make('bali1234'),
+            'telepon' => '085792308646',
+            'level' => 'masyarakat',
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
