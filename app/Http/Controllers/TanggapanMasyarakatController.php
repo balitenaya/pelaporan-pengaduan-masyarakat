@@ -5,18 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pengaduan;
 use App\Tanggapan;
-use Session;
-use Alert;
+use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;;
 
 class TanggapanMasyarakatController extends Controller
 {
-	
-	public function __construct(){
-		$this->middleware([
-			'privilege:masyarakat',
-		]);
-	}
-	
+
+    public function __construct()
+    {
+        $this->middleware([
+            'privilege:masyarakat',
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,12 +26,12 @@ class TanggapanMasyarakatController extends Controller
     public function index()
     {
         $data = [
-			'pengaduan' => Pengaduan::where('nik', Session::get('nik'))->orderBy('id', 'desc')->get(),
-			
-			'kata' => '',
-		];
-	 
-		return view('dashboard.pengaduan.riwayat', $data);
+            'pengaduan' => Pengaduan::where('nik', Session::get('nik'))->orderBy('id', 'desc')->get(),
+
+            'kata' => '',
+        ];
+
+        return view('dashboard.pengaduan.riwayat', $data);
     }
 
     /**
@@ -53,13 +54,13 @@ class TanggapanMasyarakatController extends Controller
     {
         $pengaduan = Pengaduan::find($req->id);
 
-	   $state = $pengaduan->tanggapan()->create([
-			'tanggapan' => $req->tanggapan,
-			'id_masyarakat' => Session::get('id'),
-			'tanggal_tanggapan' => now()
-	    ]);
-	
-		return back();
+        $state = $pengaduan->tanggapan()->create([
+            'tanggapan' => $req->tanggapan,
+            'id_masyarakat' => Session::get('id'),
+            'tanggal_tanggapan' => now()
+        ]);
+
+        return back();
     }
 
     /**
@@ -72,17 +73,17 @@ class TanggapanMasyarakatController extends Controller
     {
         $state = Pengaduan::find($id);
 
-	   if($state){
-			$data = [
-           		 'pengaduan' => $state,
-				 'tanggapan' => Tanggapan::where('id_pengaduan', $id)->orderBy('id', 'asc')->get(),
-			];
-		 }else{
-			Alert::error('Terjadi kesalahan!', 'Pengaduan tidak ditemukan');
-			return back();
-		 }
-		
-		return view('dashboard.pengaduan.tanggapan', $data);
+        if ($state) {
+            $data = [
+                'pengaduan' => $state,
+                'tanggapan' => Tanggapan::where('id_pengaduan', $id)->orderBy('id', 'asc')->get(),
+            ];
+        } else {
+            Alert::error('Terjadi kesalahan!', 'Pengaduan tidak ditemukan');
+            return back();
+        }
+
+        return view('dashboard.pengaduan.tanggapan', $data);
     }
 
     /**
@@ -94,10 +95,10 @@ class TanggapanMasyarakatController extends Controller
     public function edit($id)
     {
         $data = [
-			'tanggapan' => Tanggapan::find($id)
-	   ];
-	
-	   return view('dashboard.tanggapan.edit', $data);
+            'tanggapan' => Tanggapan::find($id)
+        ];
+
+        return view('dashboard.tanggapan.edit', $data);
     }
 
     /**
@@ -110,16 +111,16 @@ class TanggapanMasyarakatController extends Controller
     public function update(Request $req, $id)
     {
         $tanggapan = Tanggapan::find($id);
-	   $state = $tanggapan->update([
-			'tanggapan' => $req->tanggapan
-		]);
-		
-		if($state){
-				Alert::success('Berhasil!', 'Tanggapan berhasil di edit');
-			}else{
-				Alert::error('Terjadi kesalahan!', 'Tanggapan gagal di edit');
-			}
-		return redirect('dashboard/riwayat/'. $tanggapan->id_pengaduan);
+        $state = $tanggapan->update([
+            'tanggapan' => $req->tanggapan
+        ]);
+
+        if ($state) {
+            Alert::success('Berhasil!', 'Tanggapan berhasil di edit');
+        } else {
+            Alert::error('Terjadi kesalahan!', 'Tanggapan gagal di edit');
+        }
+        return redirect('dashboard/riwayat/' . $tanggapan->id_pengaduan);
     }
 
     /**
@@ -131,14 +132,13 @@ class TanggapanMasyarakatController extends Controller
     public function destroy($id)
     {
         $state = Tanggapan::find($id)->delete();
-		
-		if($state){
-				Alert::success('Berhasil!', 'Tanggapan berhasil di hapus');
-			}else{
-				Alert::error('Terjadi kesalahan!', 'Tanggapan gagal di hapus');
-			}
-			
-		return back();
+
+        if ($state) {
+            Alert::success('Berhasil!', 'Tanggapan berhasil di hapus');
+        } else {
+            Alert::error('Terjadi kesalahan!', 'Tanggapan gagal di hapus');
+        }
+
+        return back();
     }
-    
 }

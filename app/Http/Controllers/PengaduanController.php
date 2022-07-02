@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pengaduan;
-use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 use File;
 
 class PengaduanController extends Controller
 {
-	public function __construct(){
-		$this->middleware([
-			'privilege:admin',
-		]);
-	}
-	
+    public function __construct()
+    {
+        $this->middleware([
+            'privilege:admin',
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,27 +23,28 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-         $data = [
-             'pengaduan' => Pengaduan::orderBy('id', 'desc')->paginate(10),
-             'kata' => ''
-         ];
-         
-         return view('dashboard.pengaduan.index', $data);
+        $data = [
+            'pengaduan' => Pengaduan::orderBy('id', 'desc')->paginate(10),
+            'kata' => ''
+        ];
+
+        return view('dashboard.pengaduan.index', $data);
     }
-   
+
     /**
      * Search data to show a new route.
      *
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $req){
-      
-      $data = [
-         'pengaduan' => Pengaduan::where('nik', 'LIKE', '%'. $req->q .'%')->paginate(10),
-         'kata' => 'Menampilkan hasil : '. $req->q
-      ];
-      
-      return view('dashboard.pengaduan.index', $data);
+    public function search(Request $req)
+    {
+
+        $data = [
+            'pengaduan' => Pengaduan::where('nik', 'LIKE', '%' . $req->q . '%')->paginate(10),
+            'kata' => 'Menampilkan hasil : ' . $req->q
+        ];
+
+        return view('dashboard.pengaduan.index', $data);
     }
 
     /**
@@ -88,7 +90,7 @@ class PengaduanController extends Controller
         $data = [
             'pengaduan' => Pengaduan::find($id)
         ];
-      
+
         return view('dashboard.pengaduan.edit', $data);
     }
 
@@ -104,29 +106,28 @@ class PengaduanController extends Controller
         $state = Pengaduan::find($id)->update([
             'isi_laporan' => $req->isi_laporan
         ]);
-      
-        if($req->file('foto') != ''){
+
+        if ($req->file('foto') != '') {
             $data = Pengaduan::find($id);
-            
+
             $old_file = $data->foto;
             $new_file = $req->file('foto');
-            $new_file_name = time(). '_' .$new_file->getClientOriginalName();
-            
+            $new_file_name = time() . '_' . $new_file->getClientOriginalName();
+
             $state = $data->update([
-               'foto' => $new_file_name
+                'foto' => $new_file_name
             ]);
-            
-            File::delete('public/files/'. $old_file);
+
+            File::delete('public/files/' . $old_file);
             $new_file->move('public/files/', $new_file_name);
-         
         }
-      
-        if($state){
+
+        if ($state) {
             Alert::success('Berhasil!', 'Data berhasil di edit');
-         }else{
+        } else {
             Alert::error('Terjadi Kesalahan!', 'Data gagal di edit');
-         }
-      
+        }
+
         return back();
     }
 
@@ -139,17 +140,16 @@ class PengaduanController extends Controller
     public function destroy($id)
     {
         $state = Pengaduan::find($id);
-      
-        if($state){
-               Pengaduan::find($id)->delete();
-               File::delete('public/files/'. $state->foto);
-               
-               Alert::success('Berhasil!', 'Data berhasil di hapus');
-           }else{
-              Alert::error('Terjadi Kesalahan!', 'Data gagal di hapus');
-           }
-         
-         return back();
+
+        if ($state) {
+            Pengaduan::find($id)->delete();
+            File::delete('public/files/' . $state->foto);
+
+            Alert::success('Berhasil!', 'Data berhasil di hapus');
+        } else {
+            Alert::error('Terjadi Kesalahan!', 'Data gagal di hapus');
+        }
+
+        return back();
     }
-	
 }

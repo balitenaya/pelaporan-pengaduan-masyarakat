@@ -5,17 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pengaduan;
 use App\Tanggapan;
-use Session;
-use Alert;
+use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LaporkanPengaduanController extends Controller
 {
-	public function __construct(){
-		$this->middleware([
-			'privilege:masyarakat',
-		]);
-	}
-	
+    public function __construct()
+    {
+        $this->middleware([
+            'privilege:masyarakat',
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -44,37 +45,36 @@ class LaporkanPengaduanController extends Controller
      */
     public function store(Request $req)
     {
-      $req->validate([
+        $req->validate([
             'isi_laporan' => 'required|max:100',
             'foto' => 'required|mimes:png,jpeg,jpg'
-      ],[
+        ], [
             'required' => ':attribute tidak boleh kosong',
             'foto.required' => 'tidak ada :attribute yang dipilih',
             'mimes' => 'format :attribute harus berupa png,jpg,jpeg'
-      ]);
-      
-      $file = $req->file('foto');
-      $file_name = time(). '-' .$file->getClientOriginalName();
-      
-      $state = Pengaduan::create([
-         'tanggal_pengaduan' => $req->tanggal_pengaduan,
-         'nik' => $req->nik,
-         'isi_laporan' => $req->isi_laporan,
-         'foto' => $file_name,
-         'status' => '0'
-      ]);
-      
-      if($state){
+        ]);
+
+        $file = $req->file('foto');
+        $file_name = time() . '-' . $file->getClientOriginalName();
+
+        $state = Pengaduan::create([
+            'tanggal_pengaduan' => $req->tanggal_pengaduan,
+            'nik' => $req->nik,
+            'isi_laporan' => $req->isi_laporan,
+            'foto' => $file_name,
+            'status' => '0'
+        ]);
+
+        if ($state) {
             $folder = 'public/files/';
             $file->move($folder, $file_name);
-            
+
             Alert::success('Berhasil!', 'Pengaduan telah terkirim');
             return back()->with('status', 'Pengaduan yang anda laporkan akan kami verifikasi terlebih dahulu, tunggu tanggapan yang akan kami kirimkan mengenai pengaduan yang anda laporkan.');
-         }else{
+        } else {
             Alert::error('Terjadi Kesalahan!', 'Pengaduan gagal dikirim');
             return back();
-         }
-      
+        }
     }
 
     /**
@@ -122,41 +122,43 @@ class LaporkanPengaduanController extends Controller
         //
     }
 
-	
-	
-	public function riwayatSearch(Request $req){
-	 	$pengaduan = Pengaduan::where(
-	   	'nik', Session::get('nik')
-	   )->get();
-		
-		$data = [
-			'pengaduan' => Pengaduan::where([
-			 ['nik', Session::get('nik')],
-			 ['isi_laporan', 'like', '%'. $req->q .'%'],
-			])->orderBy('id', 'desc')->get(),
-			
-			'kata' => 'Menanpilkan hasil : '. $req->q,
-		];
-	 
-		return view('dashboard.pengaduan.riwayat', $data);
-	}
-	
-	public function lihatTanggapan($id){
-	 	$state = Pengaduan::find($id);
-		
-		if($state){
-	
-			$data = [
-				
-				'Pengaduan' => $state,
-				'tanggapan' => Tanggapan::where('id_pengaduan', $id)->orderBy('id', 'desc')->get(),
-			];
-				
-		    }else{
-				Alert::error('Terjadi Kesalahan!', 'Data Pengaduan tidak ditemukan');
-				return back();
-		    }
-		
-		return view('dashboard.pengaduan.tanggapan', $data);
-	}
+
+
+    public function riwayatSearch(Request $req)
+    {
+        $pengaduan = Pengaduan::where(
+            'nik',
+            Session::get('nik')
+        )->get();
+
+        $data = [
+            'pengaduan' => Pengaduan::where([
+                ['nik', Session::get('nik')],
+                ['isi_laporan', 'like', '%' . $req->q . '%'],
+            ])->orderBy('id', 'desc')->get(),
+
+            'kata' => 'Menanpilkan hasil : ' . $req->q,
+        ];
+
+        return view('dashboard.pengaduan.riwayat', $data);
+    }
+
+    public function lihatTanggapan($id)
+    {
+        $state = Pengaduan::find($id);
+
+        if ($state) {
+
+            $data = [
+
+                'Pengaduan' => $state,
+                'tanggapan' => Tanggapan::where('id_pengaduan', $id)->orderBy('id', 'desc')->get(),
+            ];
+        } else {
+            Alert::error('Terjadi Kesalahan!', 'Data Pengaduan tidak ditemukan');
+            return back();
+        }
+
+        return view('dashboard.pengaduan.tanggapan', $data);
+    }
 }
