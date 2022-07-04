@@ -23,7 +23,7 @@
 
     <div id="app">
         <div class="main-wrapper">
-            <div class="navbar-bg" style="background-color: #228b22"></div>
+            <div class="navbar-bg"></div>
             <nav class="navbar navbar-expand-lg main-navbar">
                 <form class="form-inline mr-auto">
                     <ul class="navbar-nav mr-3">
@@ -148,7 +148,7 @@
                     </li>
                     <li class="dropdown"><a href="#" data-toggle="dropdown"
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="{{ asset('public/img/avatar/avatar-1.png') }}"
+                            <img alt="image" src="{{ asset('public/img/avatar.jpg') }}"
                                 class="rounded-circle mr-1">
                             <div class="d-sm-none d-lg-inline-block">
                                 Hi, {{ session('nama') }}
@@ -240,12 +240,7 @@
 
             @yield('content')
 
-            <footer class="main-footer">
-                <div class="footer-left">
-                    <div class="bullet"></div>
-                    Backend By <a href="https://github.com/ravialdo/">Ravialdo Imanda Putra</a>
-                </div>
-            </footer>
+
         </div>
     </div>
 

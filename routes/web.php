@@ -12,17 +12,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', function () {
-	return view('index');
+    return view('index');
 });
 
 Route::get('/login', 'LoginController@showLogin')->name('login');
-Route::post('/login','LoginController@masyarakat');
+Route::post('/login', 'LoginController@masyarakat');
 Route::get('/dashboard', 'LoginController@successLogin');
 Route::get('/logout', 'LoginController@logout');
 
 Route::get('/login-petugas', 'LoginController@loginPetugas');
-Route::post('/login-petugas','LoginController@petugas');
+Route::post('/login-petugas', 'LoginController@petugas');
 
 Route::get('/register', 'RegisterController@showRegister');
 Route::post('/register', 'RegisterController@masyarakat');
