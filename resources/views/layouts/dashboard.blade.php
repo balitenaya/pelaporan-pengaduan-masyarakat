@@ -174,12 +174,13 @@
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
-
-                        <li class="@yield('dashboard')">
-                            <a class="nav-link active" href="{{ url('dashboard') }}">
-                                <i class="fab fa-dyalog"></i> <span>Dashboard</span>
-                            </a>
-                        </li>
+                        @if (session('level') == 'admin' || session('level') == 'kades')
+                            <li class="@yield('dashboard')">
+                                <a class="nav-link active" href="{{ url('dashboard') }}">
+                                    <i class="fab fa-dyalog"></i> <span>Dashboard</span>
+                                </a>
+                            </li>
+                        @endif
                         @if (session('level') == 'admin')
                             <li class="@yield('masyarakat')">
                                 <a class="nav-link active" href="{{ route('masyarakat.index') }}">
@@ -204,7 +205,7 @@
                                 </a>
                             </li>
                         @endif
-                        @if (session('level') == 'admin')
+                        @if (session('level') == 'admin' || session('level') == 'kades')
                             <li class="@yield('pengaduan')">
                                 <a class="nav-link" href="{{ route('pengaduan.index') }}">
                                     <i class="fas fa-table"></i> <span>Data Pengaduan</span>
@@ -223,7 +224,7 @@
                                 </a>
                             </li>
                         @endif
-                        @if (session('level') == 'admin')
+                        @if (session('level') == 'admin' || session('level') == 'kades')
                             <li class="@yield('laporan')">
                                 <a class="nav-link" href="{{ route('laporan.index') }}">
                                     <i class="fas fa-file-alt"></i> <span>Generate Laporan</span>

@@ -12,7 +12,7 @@ class ReportController extends Controller
     public function __construct()
     {
         $this->middleware([
-            'privilege:admin',
+            'privilege:admin&kades',
         ]);
     }
 

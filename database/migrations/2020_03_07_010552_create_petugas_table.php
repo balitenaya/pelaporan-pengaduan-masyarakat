@@ -19,7 +19,7 @@ class CreatePetugasTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->string('telepon', 13)->unique();
-            $table->enum('level', ['admin', 'petugas']);
+            $table->enum('level', ['admin', 'petugas', 'kades']);
             $table->timestamps();
         });
     }

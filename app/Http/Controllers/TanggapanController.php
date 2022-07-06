@@ -5,18 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pengaduan;
 use App\Tanggapan;
-use Session;
-use Alert;
+use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TanggapanController extends Controller
 {
-	
-	public function __construct(){
-		$this->middleware([
-			'privilege:admin&petugas',
-		]);
-	}
-	
+
+    public function __construct()
+    {
+        $this->middleware([
+            'privilege:admin&petugas',
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,12 +26,12 @@ class TanggapanController extends Controller
     public function index()
     {
         $data = [
-           'tanggapan' => Tanggapan::orderBy('id', 'desc')->paginate(10),
-           'pengaduan' => Pengaduan::where([
-			['status', '!=', '0'], ['status', '!=', 'tolak']
-		  ])->orderBy('id', 'desc')->paginate(10)
+            'tanggapan' => Tanggapan::orderBy('id', 'desc')->paginate(10),
+            'pengaduan' => Pengaduan::where([
+                ['status', '!=', '0'], ['status', '!=', 'tolak']
+            ])->orderBy('id', 'desc')->paginate(10)
         ];
-      
+
         return view('dashboard.tanggapan.index', $data);
     }
 
@@ -52,21 +53,21 @@ class TanggapanController extends Controller
      */
     public function store(Request $req)
     {
-          $req->validate([
-                'tanggapan' => 'required'
-          ],[
-                'required' => 'ketikan sesuatu..'
-          ]);
-          
+        $req->validate([
+            'tanggapan' => 'required'
+        ], [
+            'required' => 'ketikan sesuatu..'
+        ]);
+
         $pengaduan = Pengaduan::find($req->id);
-        
-	   $state = $pengaduan->tanggapan()->create([
-			'tanggal_tanggapan' => now(),
-			'tanggapan' => $req->tanggapan,
-			'id_petugas' => Session::get('id')
-	    ]);
-	
-		return back();
+
+        $state = $pengaduan->tanggapan()->create([
+            'tanggal_tanggapan' => now(),
+            'tanggapan' => $req->tanggapan,
+            'id_petugas' => Session::get('id')
+        ]);
+
+        return back();
     }
 
     /**
@@ -79,20 +80,20 @@ class TanggapanController extends Controller
     {
         $state = Pengaduan::find($id);
 
-	   if($state == false){
-		 	Alert::error('Terjadi kesalahan!', 'Pengaduan tidak ditemukan');
-			return back();
-		 }
-		if($state->status == 'proses' || $state->status == 'selesai' && $state->verifikasi != null){
-			  $data = [
-           		 'pengaduan' => $state,
-				 'tanggapan' => Tanggapan::where('id_pengaduan', $id)->orderBy('id', 'asc')->get()
-         		   ];
-			}else{
-				Alert::error('Terjadi kesalahan!', 'Pengaduan tidak ditemukan');
-				return back();
-			}
-         
+        if ($state == false) {
+            Alert::error('Terjadi kesalahan!', 'Pengaduan tidak ditemukan');
+            return back();
+        }
+        if ($state->status == 'proses' || $state->status == 'selesai' && $state->verifikasi != null) {
+            $data = [
+                'pengaduan' => $state,
+                'tanggapan' => Tanggapan::where('id_pengaduan', $id)->orderBy('id', 'asc')->get()
+            ];
+        } else {
+            Alert::error('Terjadi kesalahan!', 'Pengaduan tidak ditemukan');
+            return back();
+        }
+
         return view('dashboard.tanggapan.create', $data);
     }
 
@@ -105,10 +106,10 @@ class TanggapanController extends Controller
     public function edit($id)
     {
         $data = [
-			'tanggapan' => Tanggapan::find($id)
-	   ];
-	
-	   return view('dashboard.tanggapan.edit', $data);
+            'tanggapan' => Tanggapan::find($id)
+        ];
+
+        return view('dashboard.tanggapan.edit', $data);
     }
 
     /**
@@ -121,16 +122,16 @@ class TanggapanController extends Controller
     public function update(Request $req, $id)
     {
         $tanggapan = Tanggapan::find($id);
-	   $state = $tanggapan->update([
-			'tanggapan' => $req->tanggapan
-		]);
-		
-		if($state){
-				Alert::success('Berhasil!', 'Tanggapan berhasil di edit');
-			}else{
-				Alert::error('Terjadi kesalahan!', 'Tanggapan gagal di edit');
-			}
-		return redirect('dashboard/tanggapan/'. $tanggapan->id_pengaduan);
+        $state = $tanggapan->update([
+            'tanggapan' => $req->tanggapan
+        ]);
+
+        if ($state) {
+            Alert::success('Berhasil!', 'Tanggapan berhasil di edit');
+        } else {
+            Alert::error('Terjadi kesalahan!', 'Tanggapan gagal di edit');
+        }
+        return redirect('dashboard/tanggapan/' . $tanggapan->id_pengaduan);
     }
 
     /**
@@ -142,14 +143,13 @@ class TanggapanController extends Controller
     public function destroy($id)
     {
         $state = Tanggapan::find($id)->delete();
-		
-		if($state){
-				Alert::success('Berhasil!', 'Tanggapan berhasil di hapus');
-			}else{
-				Alert::error('Terjadi kesalahan!', 'Tanggapan gagal di hapus');
-			}
-			
-		return back();
-    }
 
+        if ($state) {
+            Alert::success('Berhasil!', 'Tanggapan berhasil di hapus');
+        } else {
+            Alert::error('Terjadi kesalahan!', 'Tanggapan gagal di hapus');
+        }
+
+        return back();
+    }
 }

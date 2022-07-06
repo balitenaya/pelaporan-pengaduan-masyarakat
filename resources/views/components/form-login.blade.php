@@ -7,7 +7,7 @@
                         <img src="{{ asset('public/img/stisla-light.svg') }}" alt="logo" width="100"
                             class="shadow-light rounded-circle">
                         <div class="pt-3">
-                            Aplikasi Pelaporan Pengaduan Masyarakat
+                            Sistem Informasi Pengaduan Masyarakat Desa Samsam
                         </div>
                     </div>
 

@@ -88,10 +88,6 @@
             </div>
 
       </div>
-      
-      <div class="container-fluid text-center py-3">
-            Design By <a href="https://ravialdo.github.io/">Ravialdo Imanda Putra</a>
-      </div>
 
 
       <!-- General JS Scripts -->

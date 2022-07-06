@@ -32,5 +32,14 @@ class PetugasSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        DB::table('petugas')->insert([
+            'nama' => 'Kepala Desa',
+            'username' => 'kades',
+            'password' => Hash::make('kades123'),
+            'telepon' => '087889889',
+            'level' => 'kades',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

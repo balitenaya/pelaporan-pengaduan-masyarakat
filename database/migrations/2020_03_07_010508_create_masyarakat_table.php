@@ -21,7 +21,12 @@ class CreateMasyarakatTable extends Migration
             $table->string('password', 255);
             $table->string('telepon', 13)->unique();
             $table->enum('level', ['masyarakat']);
-            $table->enum('is_verified', ['0', '1']);
+            // $table->enum('is_verified', ['0', '1']);
+            // $table->unsignedBigInteger('id_petugas')->nullable();
+            // $table->foreign('id_petugas')
+            //     ->references('id')
+            //     ->on('petugas')
+            //     ->onDelete('cascade');
             $table->timestamps();
         });
     }

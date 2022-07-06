@@ -143,10 +143,6 @@
                 PEMERINTAH KABUPATEN TABANAN <br> KECAMATAN KERAMBITAN <br>
                 <span class="size2">KANTOR KEPALA DESA SAMSAM</span><br>
             </span>
-            <span class="text-desc">Jalan Sekolah Nomor 20 Telepon (0233) 319238<br>FAX (0233) 319238 Website <span
-                    class="underline">www.smkn1talaga-mjl.net</span> - Email <span
-                    class="underline">sekolah@smkn1talaga-mjl.net</span> <br> Desa Talaga Kulon Kec. Talaga Kab.
-                Majalengka 45463 <br> </span>
         </div>
     </div>
     <div>
