@@ -92,10 +92,7 @@
                         </h2>
                         <p class="lead">Merupakan sarana pengaduan masalah dan permintaan informasi
                             yang mempunyai
-                            beberapa media penyampaian untuk mencakup semua kalangan masyarakat.<br>Laporan yang
-                            diterima
-                            akan diverifikasi dan masyarakat sebagai pelapor akan mendapatkan nomor tiket
-                            laporan. Secara
+                            beberapa media penyampaian untuk mencakup semua kalangan masyarakat.<br>Secara
                             akuntabel dan transparan masyarakat dapat meninjau kemajuan dari laporan yang
                             dikirimkan.</p>
                     </div>
@@ -118,14 +115,6 @@
                         <p class="lead">Dengan memanfaatkan berbagai media penyampaian informasi,
                             masyarakat
                             menjadi lebih dekat dan mudah untuk menyampaikan aspirasi.
-                            <br>
-                            Tersedia 7 macam kanal pengaduan.
-                            <br>
-                            Mendapatkan nomor tiket pelaporan.
-                            <br>
-                            Kemajuan laporan dapat ditinjau langsung.
-                            <br>
-                            Laporan terdokumentasi untuk menentukan berbagai kebijakan
                         </p>
                     </div>
                     <div class="col-md-5 order-md-1">

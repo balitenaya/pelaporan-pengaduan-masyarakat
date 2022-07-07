@@ -174,7 +174,7 @@
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
-                        @if (session('level') == 'admin' || session('level') == 'kades')
+                        @if (session('level') == 'admin' || session('level') == 'kades' || session('level') == 'petugas')
                             <li class="@yield('dashboard')">
                                 <a class="nav-link active" href="{{ url('dashboard') }}">
                                     <i class="fab fa-dyalog"></i> <span>Dashboard</span>
