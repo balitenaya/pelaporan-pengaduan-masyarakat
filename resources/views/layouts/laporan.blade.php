@@ -137,9 +137,10 @@
 
     <!-- header -->
     <div class="text-center">
-
         <div>
-            <span class="text-header text-bold text-danger">
+            <span class="text-header text-bold text-danger"><img src="{{ asset('public/img/tabanan.jpg') }}"
+                    alt="tabanan" class="img-fluid img-thumbnail mb-2"
+                    style="width: 100px; height: 100px; object-fit: cover; float: left"><br>
                 PEMERINTAH KABUPATEN TABANAN <br> KECAMATAN KERAMBITAN <br>
                 <span class="size2">KANTOR KEPALA DESA SAMSAM</span><br>
             </span>

@@ -34,10 +34,11 @@
 
                     <div class="form-group">
                         <label>Tahun</label>
-                        <input type="year" class="form-control" name="tahun" required>
+                        {{-- <input type="year" class="form-control" name="tahun" required>
                         <div class="text-small">
                             Tahun minimal dan maksimal harus 4 digit
-                        </div>
+                        </div> --}}
+                        <input type="text" class="form-control" id="tahun" name="tahun">
                     </div>
 
                     <button type="submit" class="btn btn-primary float-right">
@@ -49,3 +50,11 @@
         </div>
     </div>
 </div>
+<script>
+    $('#tahun').datepicker({
+        format: "yyyy",
+        viewMode: "years",
+        minViewMode: "years",
+        autoclose: true
+    });
+</script>
