@@ -213,7 +213,7 @@
                                 </a>
                             </li>
                         @endif
-                        @if (session('level') == 'admin' || session('level') == 'kades')
+                        @if (session('level') == 'admin' || session('level') == 'kades' || session('level') == 'petugas')
                             <li class="@yield('pengaduan')">
                                 <a class="nav-link" href="{{ route('pengaduan.index') }}">
                                     <i class="fas fa-table"></i> <span>Data Pengaduan</span>

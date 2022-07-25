@@ -74,10 +74,10 @@
                                     </td>
                                     @if (session('level') == 'admin')
                                         <td class="text-center">
-                                            <a href="{{ route('pengaduan.edit', $row->id) }}"
+                                            {{-- <a href="{{ route('pengaduan.edit', $row->id) }}"
                                                 class="btn btn-primary my-1">
                                                 <i class="fa fa-edit"></i>
-                                            </a>
+                                            </a> --}}
 
                                             <form method="post" action="{{ url('dashboard/pengaduan', $row->id) }}"
                                                 id="destroy{{ $row->id }}">

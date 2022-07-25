@@ -44,11 +44,11 @@
                     <div class="tab-pane fade show active" role="tabpanel" id="laporan" aria-labelledby="home-tab3">
                         <div class="chocolat-parent">
                             <a href="{{ asset('public/files/' . $tanggapan->pengaduan->foto) }}"
-                                class="chocolat-image" title="Gambar Pengaduan" style="height:200px; width:200px;">
+                                class="chocolat-image" title="Gambar Pengaduan" style="width: 200px; height: 200px; object-fit: cover;">
                                 <div class="text-center">
                                     <img alt="Gambar tidak ditemukan"
                                         src="{{ asset('public/files/' . $tanggapan->pengaduan->foto) }}"
-                                        class="img-fluid img-thumbnail mb-2" style="height:200px; width:200px;">
+                                        class="img-fluid img-thumbnail mb-2" style="width: 200px; height: 200px; object-fit: cover;">
                                 </div>
                             </a>
                             <div class="text-muted text-center">
