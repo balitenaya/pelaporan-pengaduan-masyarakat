@@ -64,3 +64,7 @@ Route::get('/dashboard/tanggapan/search', 'TanggapanController@search')->name('t
 
 Route::get('/dashboard/laporan', 'ReportController@index')->name('laporan.index');
 Route::post('/dashboard/laporan/generate', 'ReportController@generate')->name('laporan.generate');
+
+// Route::get('/halo', function () {
+//     return "echo";
+// });

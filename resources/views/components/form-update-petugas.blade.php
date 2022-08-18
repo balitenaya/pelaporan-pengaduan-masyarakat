@@ -96,6 +96,9 @@
                                 <option value="">Silahkan Pilih</option>
                                 <option value="admin" {{ $level == 'admin' ? 'selected' : '' }}>Admin</option>
                                 <option value="petugas" {{ $level == 'petugas' ? 'selected' : '' }}>Petugas</option>
+                                @if (\App\Petugas::where('level', 'kades')->count() < 1)
+                                    <option value="kades" {{ $level == 'kades' ? 'selected' : '' }}>Kades</option>
+                                @endif
                             </select>
                             @error('level')
                                 <div class="invalid-feedback">

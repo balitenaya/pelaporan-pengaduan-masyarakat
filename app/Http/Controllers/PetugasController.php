@@ -55,7 +55,11 @@ class PetugasController extends Controller
      */
     public function create()
     {
-        return view('dashboard.petugas.create');
+        $data = [
+            'petugas' => Petugas::orderBy('id', 'desc')->paginate(10),
+            'kata' => ''
+        ];
+        return view('dashboard.petugas.create', $data);
     }
 
     /**

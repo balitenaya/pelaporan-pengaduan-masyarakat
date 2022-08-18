@@ -3,17 +3,19 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use App\Petugas;
 
 class FormCreatePetugas extends Component
 {
+    public $petugas;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($petugas)
     {
-        //
+        $this->petugas = $petugas;
     }
 
     /**

@@ -26,7 +26,7 @@
 
             <div class="section-body">
 
-                <x-form-create-petugas />
+                <x-form-create-petugas :petugas="$petugas" />
 
             </div>
         </section>

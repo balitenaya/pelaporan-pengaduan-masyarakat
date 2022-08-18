@@ -47,7 +47,7 @@ class LaporkanPengaduanController extends Controller
     {
         $req->validate([
             'isi_laporan' => 'required|max:100',
-            'foto' => 'required|mimes:png,jpeg,jpg'
+            'foto' => 'required|mimes:png,jpeg,jpg|max:2048'
         ], [
             'required' => ':attribute tidak boleh kosong',
             'foto.required' => 'tidak ada :attribute yang dipilih',

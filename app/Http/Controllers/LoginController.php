@@ -50,7 +50,7 @@ class LoginController extends Controller
 
                 return redirect('/dashboard/laporkan-pengaduan');
             } else {
-                Alert::error('Terjadi Kesalahan!', 'Gagal login, password yang anda masukan salah');
+                Alert::error('Terjadi Kesalahan!', 'Gagal login, password yang anda masukan salah. Silakan menghubungi (0361)4790012 untuk reset password');
                 return back();
             }
         } else {
@@ -95,7 +95,7 @@ class LoginController extends Controller
 
                 return redirect('dashboard');
             } else {
-                Alert::error('Terjadi Kesalahan!', 'Gagal login, password yang anda masukan salah');
+                Alert::error('Terjadi Kesalahan!', 'Gagal login, password yang anda masukan salah.');
                 return back();
             }
         } else {
